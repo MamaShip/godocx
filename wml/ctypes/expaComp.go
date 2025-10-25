@@ -3,7 +3,7 @@ package ctypes
 import (
 	"encoding/xml"
 
-	"github.com/gomutex/godocx/wml/stypes"
+	"github.com/MamaShip/godocx/wml/stypes"
 )
 
 // This element specifies the amount by which each character shall be expanded or when the character is rendered in the document

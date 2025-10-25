@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/gomutex/godocx/wml/stypes"
+	"github.com/MamaShip/godocx/wml/stypes"
 )
 
 func TestTableBorders_MarshalXML(t *testing.T) {

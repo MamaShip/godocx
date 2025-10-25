@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/gomutex/godocx/wml/stypes"
+	"github.com/MamaShip/godocx/wml/stypes"
 )
 
 func TestDocGrid_MarshalXML_AllAttributes(t *testing.T) {

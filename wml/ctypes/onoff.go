@@ -3,7 +3,7 @@ package ctypes
 import (
 	"encoding/xml"
 
-	"github.com/gomutex/godocx/wml/stypes"
+	"github.com/MamaShip/godocx/wml/stypes"
 )
 
 // Optional Bool Element: Helper element that only has one attribute which is optional

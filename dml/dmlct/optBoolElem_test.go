@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/gomutex/godocx/dml/dmlst"
+	"github.com/MamaShip/godocx/dml/dmlst"
 )
 
 func TestOptBoolElem_MarshalXML(t *testing.T) {

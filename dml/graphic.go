@@ -3,8 +3,8 @@ package dml
 import (
 	"encoding/xml"
 
-	"github.com/gomutex/godocx/common/constants"
-	"github.com/gomutex/godocx/dml/dmlpic"
+	"github.com/MamaShip/godocx/common/constants"
+	"github.com/MamaShip/godocx/dml/dmlpic"
 )
 
 type Graphic struct {

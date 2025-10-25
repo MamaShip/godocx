@@ -9,7 +9,7 @@ import (
 	"sort"
 	"time"
 
-	"github.com/gomutex/godocx/common/constants"
+	"github.com/MamaShip/godocx/common/constants"
 )
 
 // Close method is used to close the RootDoc. Currently, it does not perform any specific actions.

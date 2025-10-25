@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"testing"
 
-	godocx "github.com/gomutex/godocx"
-	docxpkg "github.com/gomutex/godocx/docx"
+	godocx "github.com/MamaShip/godocx"
+	docxpkg "github.com/MamaShip/godocx/docx"
 	"github.com/stretchr/testify/require"
 )
 
