@@ -1,4 +1,4 @@
-module github.com/gomutex/godocx
+module github.com/MamaShip/godocx
 
 go 1.18
 
