@@ -64,6 +64,8 @@ func (r *Run) Font(font string) *Run {
 
 	r.getProp().Fonts.Ascii = font
 	r.getProp().Fonts.HAnsi = font
+	r.getProp().Fonts.EastAsia = font
+	r.getProp().Fonts.CS = font
 	return r
 }
 
