@@ -1,5 +1,10 @@
 # Godocx
 
+This repository is forked from：github.com/gomutex/godocx ！
+
+Some code has been modified for personal use.
+
+
 [![Go CI](https://github.com/MamaShip/godocx/actions/workflows/go.yml/badge.svg)](https://github.com/MamaShip/godocx/actions/workflows/go.yml) ![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/MamaShip/godocx) [![Go Reference](https://pkg.go.dev/badge/github.com/MamaShip/godocx.svg)](https://pkg.go.dev/github.com/MamaShip/godocx)
  [![Go Report Card](https://goreportcard.com/badge/github.com/MamaShip/godocx)](https://goreportcard.com/report/github.com/MamaShip/godocx) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 

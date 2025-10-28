@@ -122,3 +122,95 @@ func (rd *RootDoc) AddPageBreak() *Paragraph {
 
 	return p
 }
+
+// AddHorizontalLine adds a simple horizontal line (divider) to the document.
+//
+// This creates an empty paragraph with a bottom border styled as a single line.
+// The default line is a single solid line with automatic color and standard width (0.75pt).
+//
+// Returns:
+//   - *Paragraph: A pointer to the newly created Paragraph object with a horizontal line.
+//
+// Example:
+//
+//	document := godocx.NewDocument()
+//	document.AddHorizontalLine()
+func (rd *RootDoc) AddHorizontalLine() *Paragraph {
+	p := rd.AddEmptyParagraph()
+	p.BottomBorder(stypes.BorderStyleSingle, 6, "auto")
+	return p
+}
+
+// AddDoubleHorizontalLine adds a double horizontal line (divider) to the document.
+//
+// This creates an empty paragraph with a bottom border styled as a double line.
+//
+// Returns:
+//   - *Paragraph: A pointer to the newly created Paragraph object with a double horizontal line.
+//
+// Example:
+//
+//	document := godocx.NewDocument()
+//	document.AddDoubleHorizontalLine()
+func (rd *RootDoc) AddDoubleHorizontalLine() *Paragraph {
+	p := rd.AddEmptyParagraph()
+	p.BottomBorder(stypes.BorderStyleDouble, 6, "auto")
+	return p
+}
+
+// AddThickHorizontalLine adds a thick horizontal line (divider) to the document.
+//
+// This creates an empty paragraph with a bottom border styled as a thick line.
+//
+// Returns:
+//   - *Paragraph: A pointer to the newly created Paragraph object with a thick horizontal line.
+//
+// Example:
+//
+//	document := godocx.NewDocument()
+//	document.AddThickHorizontalLine()
+func (rd *RootDoc) AddThickHorizontalLine() *Paragraph {
+	p := rd.AddEmptyParagraph()
+	p.BottomBorder(stypes.BorderStyleThick, 12, "auto")
+	return p
+}
+
+// AddDashedHorizontalLine adds a dashed horizontal line (divider) to the document.
+//
+// This creates an empty paragraph with a bottom border styled as a dashed line.
+//
+// Returns:
+//   - *Paragraph: A pointer to the newly created Paragraph object with a dashed horizontal line.
+//
+// Example:
+//
+//	document := godocx.NewDocument()
+//	document.AddDashedHorizontalLine()
+func (rd *RootDoc) AddDashedHorizontalLine() *Paragraph {
+	p := rd.AddEmptyParagraph()
+	p.BottomBorder(stypes.BorderStyleDashed, 6, "auto")
+	return p
+}
+
+// AddCustomHorizontalLine adds a custom horizontal line (divider) to the document with specified properties.
+//
+// This allows full customization of the horizontal line's appearance.
+//
+// Parameters:
+//   - style: The border style from stypes.BorderStyle (e.g., BorderStyleSingle, BorderStyleDouble, BorderStyleWave).
+//   - size: The border width in eighths of a point (e.g., 6 = 0.75pt, 12 = 1.5pt, 24 = 3pt).
+//   - color: The border color in hex format (e.g., "FF0000" for red, "0000FF" for blue) or "auto" for automatic color.
+//
+// Returns:
+//   - *Paragraph: A pointer to the newly created Paragraph object with a custom horizontal line.
+//
+// Example:
+//
+//	document := godocx.NewDocument()
+//	// Add a red wavy line at 1.5pt thickness
+//	document.AddCustomHorizontalLine(stypes.BorderStyleWave, 12, "FF0000")
+func (rd *RootDoc) AddCustomHorizontalLine(style stypes.BorderStyle, size int, color string) *Paragraph {
+	p := rd.AddEmptyParagraph()
+	p.BottomBorder(style, size, color)
+	return p
+}

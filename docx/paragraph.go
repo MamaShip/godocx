@@ -356,3 +356,64 @@ func (p *Paragraph) AddPicture(path string, width units.Inch, height units.Inch)
 		Inline: inline,
 	}, nil
 }
+
+// Border sets the paragraph border properties.
+//
+// This function assigns border definitions to the paragraph,
+// allowing customization of borders on all sides.
+//
+// Parameters:
+//   - border: A pointer to a ctypes.ParaBorder instance representing the border properties.
+//
+// Returns:
+//   - *Paragraph: The paragraph instance for method chaining.
+//
+// Example:
+//
+//	border := &ctypes.ParaBorder{
+//	    Bottom: &ctypes.Border{
+//	        Val:  stypes.BorderStyleSingle,
+//	        Size: internal.ToPtr(6),
+//	        Color: internal.ToPtr("auto"),
+//	    },
+//	}
+//	p := document.AddParagraph("Text with border")
+//	p.Border(border)
+func (p *Paragraph) Border(border *ctypes.ParaBorder) *Paragraph {
+	p.ensureProp()
+	p.ct.Property.Border = border
+	return p
+}
+
+// BottomBorder sets the bottom border of the paragraph.
+//
+// This is a convenience method for creating horizontal lines or underlines for paragraphs.
+//
+// Parameters:
+//   - style: The border style (e.g., stypes.BorderStyleSingle, stypes.BorderStyleDouble).
+//   - size: The border width in eighths of a point (e.g., 6 = 0.75pt, 12 = 1.5pt).
+//   - color: The border color in hex format (e.g., "FF0000" for red) or "auto" for automatic color.
+//
+// Returns:
+//   - *Paragraph: The paragraph instance for method chaining.
+//
+// Example:
+//
+//	p := document.AddEmptyParagraph()
+//	p.BottomBorder(stypes.BorderStyleSingle, 6, "auto")
+func (p *Paragraph) BottomBorder(style stypes.BorderStyle, size int, color string) *Paragraph {
+	p.ensureProp()
+
+	if p.ct.Property.Border == nil {
+		p.ct.Property.Border = &ctypes.ParaBorder{}
+	}
+
+	p.ct.Property.Border.Bottom = &ctypes.Border{
+		Val:   style,
+		Size:  &size,
+		Space: internal.ToPtr("1"),
+		Color: &color,
+	}
+
+	return p
+}
