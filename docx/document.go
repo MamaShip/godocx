@@ -126,6 +126,7 @@ func (rd *RootDoc) AddPageBreak() *Paragraph {
 // AddHorizontalLine adds a simple horizontal line (divider) to the document.
 //
 // This creates an empty paragraph with a bottom border styled as a single line.
+// The line is compact with minimal spacing to avoid creating visible empty space.
 // The default line is a single solid line with automatic color and standard width (0.75pt).
 //
 // Returns:
@@ -138,12 +139,18 @@ func (rd *RootDoc) AddPageBreak() *Paragraph {
 func (rd *RootDoc) AddHorizontalLine() *Paragraph {
 	p := rd.AddEmptyParagraph()
 	p.BottomBorder(stypes.BorderStyleSingle, 6, "auto")
+
+	// Set tight spacing to avoid empty line effect
+	p.Spacing(0, 0)
+	p.LineSpacing(20, stypes.LineSpacingRuleExact) // 1pt exact line height
+
 	return p
 }
 
 // AddDoubleHorizontalLine adds a double horizontal line (divider) to the document.
 //
 // This creates an empty paragraph with a bottom border styled as a double line.
+// The line is compact with minimal spacing to avoid creating visible empty space.
 //
 // Returns:
 //   - *Paragraph: A pointer to the newly created Paragraph object with a double horizontal line.
@@ -155,12 +162,18 @@ func (rd *RootDoc) AddHorizontalLine() *Paragraph {
 func (rd *RootDoc) AddDoubleHorizontalLine() *Paragraph {
 	p := rd.AddEmptyParagraph()
 	p.BottomBorder(stypes.BorderStyleDouble, 6, "auto")
+
+	// Set tight spacing to avoid empty line effect
+	p.Spacing(0, 0)
+	p.LineSpacing(20, stypes.LineSpacingRuleExact) // 1pt exact line height
+
 	return p
 }
 
 // AddThickHorizontalLine adds a thick horizontal line (divider) to the document.
 //
 // This creates an empty paragraph with a bottom border styled as a thick line.
+// The line is compact with minimal spacing to avoid creating visible empty space.
 //
 // Returns:
 //   - *Paragraph: A pointer to the newly created Paragraph object with a thick horizontal line.
@@ -172,12 +185,18 @@ func (rd *RootDoc) AddDoubleHorizontalLine() *Paragraph {
 func (rd *RootDoc) AddThickHorizontalLine() *Paragraph {
 	p := rd.AddEmptyParagraph()
 	p.BottomBorder(stypes.BorderStyleThick, 12, "auto")
+
+	// Set tight spacing to avoid empty line effect
+	p.Spacing(0, 0)
+	p.LineSpacing(20, stypes.LineSpacingRuleExact) // 1pt exact line height
+
 	return p
 }
 
 // AddDashedHorizontalLine adds a dashed horizontal line (divider) to the document.
 //
 // This creates an empty paragraph with a bottom border styled as a dashed line.
+// The line is compact with minimal spacing to avoid creating visible empty space.
 //
 // Returns:
 //   - *Paragraph: A pointer to the newly created Paragraph object with a dashed horizontal line.
@@ -189,12 +208,18 @@ func (rd *RootDoc) AddThickHorizontalLine() *Paragraph {
 func (rd *RootDoc) AddDashedHorizontalLine() *Paragraph {
 	p := rd.AddEmptyParagraph()
 	p.BottomBorder(stypes.BorderStyleDashed, 6, "auto")
+
+	// Set tight spacing to avoid empty line effect
+	p.Spacing(0, 0)
+	p.LineSpacing(20, stypes.LineSpacingRuleExact) // 1pt exact line height
+
 	return p
 }
 
 // AddCustomHorizontalLine adds a custom horizontal line (divider) to the document with specified properties.
 //
 // This allows full customization of the horizontal line's appearance.
+// The line is compact with minimal spacing to avoid creating visible empty space.
 //
 // Parameters:
 //   - style: The border style from stypes.BorderStyle (e.g., BorderStyleSingle, BorderStyleDouble, BorderStyleWave).
@@ -212,5 +237,10 @@ func (rd *RootDoc) AddDashedHorizontalLine() *Paragraph {
 func (rd *RootDoc) AddCustomHorizontalLine(style stypes.BorderStyle, size int, color string) *Paragraph {
 	p := rd.AddEmptyParagraph()
 	p.BottomBorder(style, size, color)
+
+	// Set tight spacing to avoid empty line effect
+	p.Spacing(0, 0)
+	p.LineSpacing(20, stypes.LineSpacingRuleExact) // 1pt exact line height
+
 	return p
 }

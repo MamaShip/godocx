@@ -11,6 +11,20 @@ import (
 
 // Note: setupRootDoc is defined in docx_test.go
 
+// assertTightSpacing verifies that paragraph has tight spacing settings to avoid empty line effect
+func assertTightSpacing(t *testing.T, p *Paragraph) {
+	t.Helper()
+	assert.NotNil(t, p.ct.Property.Spacing, "Paragraph should have spacing")
+	assert.NotNil(t, p.ct.Property.Spacing.Before, "Spacing Before should be set")
+	assert.Equal(t, uint64(0), *p.ct.Property.Spacing.Before, "Before spacing should be 0")
+	assert.NotNil(t, p.ct.Property.Spacing.After, "Spacing After should be set")
+	assert.Equal(t, uint64(0), *p.ct.Property.Spacing.After, "After spacing should be 0")
+	assert.NotNil(t, p.ct.Property.Spacing.Line, "Line spacing should be set")
+	assert.Equal(t, 20, *p.ct.Property.Spacing.Line, "Line spacing should be 20 (1pt)")
+	assert.NotNil(t, p.ct.Property.Spacing.LineRule, "LineRule should be set")
+	assert.Equal(t, stypes.LineSpacingRuleExact, *p.ct.Property.Spacing.LineRule, "LineRule should be exact")
+}
+
 // TestAddHorizontalLine tests the AddHorizontalLine method
 func TestAddHorizontalLine(t *testing.T) {
 	doc := setupRootDoc(t)
@@ -23,6 +37,9 @@ func TestAddHorizontalLine(t *testing.T) {
 	assert.Equal(t, stypes.BorderStyleSingle, p.ct.Property.Border.Bottom.Val, "Border style should be single")
 	assert.Equal(t, 6, *p.ct.Property.Border.Bottom.Size, "Border size should be 6")
 	assert.Equal(t, "auto", *p.ct.Property.Border.Bottom.Color, "Border color should be auto")
+
+	// Verify tight spacing to avoid empty line effect
+	assertTightSpacing(t, p)
 }
 
 // TestAddDoubleHorizontalLine tests the AddDoubleHorizontalLine method
@@ -34,6 +51,9 @@ func TestAddDoubleHorizontalLine(t *testing.T) {
 	assert.NotNil(t, p.ct.Property.Border.Bottom, "Paragraph should have bottom border")
 	assert.Equal(t, stypes.BorderStyleDouble, p.ct.Property.Border.Bottom.Val, "Border style should be double")
 	assert.Equal(t, 6, *p.ct.Property.Border.Bottom.Size, "Border size should be 6")
+
+	// Verify tight spacing to avoid empty line effect
+	assertTightSpacing(t, p)
 }
 
 // TestAddThickHorizontalLine tests the AddThickHorizontalLine method
@@ -45,6 +65,9 @@ func TestAddThickHorizontalLine(t *testing.T) {
 	assert.NotNil(t, p.ct.Property.Border.Bottom, "Paragraph should have bottom border")
 	assert.Equal(t, stypes.BorderStyleThick, p.ct.Property.Border.Bottom.Val, "Border style should be thick")
 	assert.Equal(t, 12, *p.ct.Property.Border.Bottom.Size, "Border size should be 12")
+
+	// Verify tight spacing to avoid empty line effect
+	assertTightSpacing(t, p)
 }
 
 // TestAddDashedHorizontalLine tests the AddDashedHorizontalLine method
@@ -56,6 +79,9 @@ func TestAddDashedHorizontalLine(t *testing.T) {
 	assert.NotNil(t, p.ct.Property.Border.Bottom, "Paragraph should have bottom border")
 	assert.Equal(t, stypes.BorderStyleDashed, p.ct.Property.Border.Bottom.Val, "Border style should be dashed")
 	assert.Equal(t, 6, *p.ct.Property.Border.Bottom.Size, "Border size should be 6")
+
+	// Verify tight spacing to avoid empty line effect
+	assertTightSpacing(t, p)
 }
 
 // TestAddCustomHorizontalLine tests the AddCustomHorizontalLine method
@@ -108,8 +134,30 @@ func TestAddCustomHorizontalLine(t *testing.T) {
 			assert.Equal(t, tt.expectedStyle, p.ct.Property.Border.Bottom.Val, "Border style should match")
 			assert.Equal(t, tt.expectedSize, *p.ct.Property.Border.Bottom.Size, "Border size should match")
 			assert.Equal(t, tt.expectedColor, *p.ct.Property.Border.Bottom.Color, "Border color should match")
+
+			// Verify tight spacing to avoid empty line effect
+			assertTightSpacing(t, p)
 		})
 	}
+}
+
+// TestParagraphLineSpacing tests the LineSpacing method
+func TestParagraphLineSpacing(t *testing.T) {
+	doc := setupRootDoc(t)
+	p := doc.AddParagraph("Test paragraph")
+
+	result := p.LineSpacing(240, stypes.LineSpacingRuleExact)
+
+	// Verify method returns paragraph for chaining
+	assert.Equal(t, p, result, "LineSpacing should return the paragraph for chaining")
+
+	// Verify spacing properties
+	assert.NotNil(t, p.ct.Property, "Paragraph should have properties")
+	assert.NotNil(t, p.ct.Property.Spacing, "Paragraph should have spacing")
+	assert.NotNil(t, p.ct.Property.Spacing.Line, "Line spacing should be set")
+	assert.Equal(t, 240, *p.ct.Property.Spacing.Line, "Line spacing should be 240")
+	assert.NotNil(t, p.ct.Property.Spacing.LineRule, "LineRule should be set")
+	assert.Equal(t, stypes.LineSpacingRuleExact, *p.ct.Property.Spacing.LineRule, "LineRule should be exact")
 }
 
 // TestParagraphBottomBorder tests the BottomBorder method

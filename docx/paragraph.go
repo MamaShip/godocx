@@ -95,6 +95,38 @@ func (p *Paragraph) Spacing(before uint64, after uint64) {
 	p.ct.Property.Spacing = ctypes.NewParagraphSpacing(before, after)
 }
 
+// LineSpacing sets the line spacing (line height) within the paragraph.
+//
+// This method allows precise control over the vertical space between lines within a paragraph.
+// It's particularly useful for creating compact layouts like horizontal lines.
+//
+// Parameters:
+//   - line: The line spacing value in twips (1/20th of a point). Common values:
+//   - 20 = 1pt (minimal, for tight layouts)
+//   - 240 = 12pt (standard single spacing)
+//   - 360 = 18pt (1.5 line spacing)
+//   - lineRule: The type of spacing (stypes.LineSpacingRuleAuto, LineSpacingRuleExact, or LineSpacingRuleAtLeast)
+//
+// Returns:
+//   - *Paragraph: The paragraph instance for method chaining.
+//
+// Example:
+//
+//	p := document.AddEmptyParagraph()
+//	p.LineSpacing(20, stypes.LineSpacingRuleExact) // Set to exactly 1pt line height
+func (p *Paragraph) LineSpacing(line int, lineRule stypes.LineSpacingRule) *Paragraph {
+	p.ensureProp()
+
+	if p.ct.Property.Spacing == nil {
+		p.ct.Property.Spacing = &ctypes.Spacing{}
+	}
+
+	p.ct.Property.Spacing.Line = &line
+	p.ct.Property.Spacing.LineRule = &lineRule
+
+	return p
+}
+
 // Style sets the paragraph style.
 //
 // Parameters:
